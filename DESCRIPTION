@@ -1,0 +1,21 @@
+Package: glatosExtras
+Title: Niche functions that complement glatos
+Version: 0.0.0.9000
+Authors@R: 
+    person("Christopher", "Holbrook", , "cholbrook@usgs.gov", 
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-8203-6856"))
+Description: A companion to the R package glatos, with tools expected to have a 
+    small user base but with sufficient complexity that simple script-sharing 
+    is undesired.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.0
+Imports: 
+    dplyr,
+    glatos,
+    openxlsx
+Depends: 
+    R (>= 2.10)
+LazyData: true
