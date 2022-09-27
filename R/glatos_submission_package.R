@@ -1167,7 +1167,7 @@ write_glatos_workbook_xl <- function(wb,
   if(is.null(xl_file)){
 
     # get GLATOS project code from Project sheet
-    glatos_project <- as.character(openxlsx::readWorkbook(wbx, "Project",
+    glatos_project <- as.character(openxlsx::readWorkbook(wb, "Project",
                                                           colNames = FALSE,
                                                           rows = 4,
                                                           cols = 4)[1])
