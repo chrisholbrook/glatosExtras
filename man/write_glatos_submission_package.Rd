@@ -51,7 +51,6 @@ wb_file <- system.file("extdata",
 
 wb <- glatos::read_glatos_workbook(wb_file)
 
-write_glatos_submission_package(wb, local_tzone = "US/Eastern",
-                                overwrite = TRUE)
+write_glatos_submission_package(wb, local_tzone = "US/Eastern")
 
 }

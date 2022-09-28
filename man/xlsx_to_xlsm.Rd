@@ -10,5 +10,5 @@ xlsx_to_xlsm(xlsx_file)
 Convert XLSX to XLSM file
 }
 \note{
-I am  sure there is any need for this function.
+I am not sure there is any need for this function.
 }

@@ -1225,8 +1225,7 @@ write_glatos_workbook_xl <- function(wb,
 #'
 #' wb <- glatos::read_glatos_workbook(wb_file)
 #'
-#' write_glatos_submission_package(wb, local_tzone = "US/Eastern",
-#'                                 overwrite = TRUE)
+#' write_glatos_submission_package(wb, local_tzone = "US/Eastern")
 #'
 #' @export
 write_glatos_submission_package <- function(wb,
@@ -1397,7 +1396,7 @@ write_glatos_submission_package <- function(wb,
 
 #' Convert XLSX to XLSM file
 #'
-#' @note I am  sure there is any need for this function.
+#' @note I am not sure there is any need for this function.
 xlsx_to_xlsm <- function(xlsx_file){
 
   stopifnot("input 'xlsx_file' must have extention 'xlsx'" =

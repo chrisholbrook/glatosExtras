@@ -27,8 +27,7 @@ To make a GLATOSWeb Submission Package (a zip archive required to submit
 
  wb <- glatos::read_glatos_workbook(wb_file)
 
- write_glatos_submission_package(wb, local_tzone = "US/Eastern",
-                                overwrite = TRUE)
+ write_glatos_submission_package(wb, local_tzone = "US/Eastern")
 
  ```
  
