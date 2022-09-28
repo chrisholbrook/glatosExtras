@@ -404,7 +404,7 @@ new_glatos_workbook_xlsx <- function(){
                        "STOCK",
                        "LENGTH",
                        "WEIGHT",
-                       "LENGT_TYPE",
+                       "LENGTH_TYPE",
                        "AGE",
                        "SEX",
                        "DNA_SAMPLE_TAKEN",
