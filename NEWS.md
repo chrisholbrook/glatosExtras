@@ -1,3 +1,10 @@
+# glatosExtras 0.1.0
+
+## New features
+
+* New `read_henrys_trimble_csv()` function to read GPS data exported from Trimble in peculiar CSV format. See example file `HECWL_20220505.csv` in `inst/extdata`.
+
+
 # glatosExtras 0.0.1
 
 ## New features
