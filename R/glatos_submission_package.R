@@ -1148,10 +1148,10 @@ add_comments_glatos_workbook_xlsx <- function(wbx){
 #'
 #' #openxlsx::openXL(wbx)
 #'
-#' write_glatos_workbook_xl(wbx)
+#' write_glatos_workbook_xlsx(wbx)
 #' @export
 #'
-write_glatos_workbook_xl <- function(wb,
+write_glatos_workbook_xlsx <- function(wb,
                                      out_dir = NULL,
                                      xl_file = NULL,
                                      xl_format = "xlsx",
@@ -1251,10 +1251,10 @@ write_glatos_submission_package <- function(wb,
   }
 
   # Write xl file to disk
-  xl_file <- write_glatos_workbook_xl(wbx, out_dir = out_dir,
-                                       xl_file = xl_file,
-                                       xl_format = xl_format,
-                                       overwrite = overwrite)
+  xl_file <- write_glatos_workbook_xlsx(wbx, out_dir = out_dir,
+                                        xl_file = xl_file,
+                                        xl_format = xl_format,
+                                        overwrite = overwrite)
 
   # Write csvs to disk
   temp_dir <- tempdir()
