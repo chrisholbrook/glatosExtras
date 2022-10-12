@@ -6,7 +6,7 @@ Niche functions that complement glatos
 ```{r}
 
 library(remotes)
-install_github("cholbrook/glatosExtras")
+install_github("chrisholbrook/glatosExtras")
 
 ```
 
