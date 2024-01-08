@@ -2,4 +2,5 @@
 
 export(as_glatos_workbook_xlsx)
 export(write_glatos_submission_package)
+export(write_glatos_workbook)
 export(write_glatos_workbook_xlsx)

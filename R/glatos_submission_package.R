@@ -1111,9 +1111,9 @@ add_comments_glatos_workbook_xlsx <- function(wbx){
 }
 
 
-#' Write glatos_workbook object as openxlsx Workbook to *.xlsx or *.xlsm file
+#' Write glatos_workbook object to *.xlsx file
 #'
-#' Used for writing a GLATOS workbook submission package to disk.
+#' Write a \code{glatos_workbook} object to disk (as *.xlsx).
 #'
 #' @param wb A \code{glatos_workbook} object; e.g., created by
 #'   \code{\link{read_glatos_workbook}}.
@@ -1132,6 +1132,18 @@ add_comments_glatos_workbook_xlsx <- function(wbx){
 #'
 #' @param overwrite Should existing file with same name be overwritten?
 #'
+#' @param local_tzone A character string specifying the time zone to be used for
+#'   the conversion from UTC to local time (e.g, "US/Eastern"). See details.
+#'
+#' @details Local time zone must be specified (via \code{local_tzone}) because
+#'   \code{glatos_workbook} objects only contain time stamps in UTC. However,
+#'   the GLATOS Data Submission Package (a *.zip archive containing a *.xlsm
+#'   file) requires data in a local time zone (limited to \code{"US/Eastern"} or
+#'   \code{"US/Central"}, which are actually expressed simply as
+#'   \code{"Eastern"} or \code{"Central"} in a GLATOS Submission Package. Thus,
+#'   for GLATOS Data Portal compatibility, only values of \code{local_tzone}
+#'   supported are \code{"US/Eastern"} or \code{"US/Central"} are allowed.
+#'
 #' @author Christopher Holbrook, \email{cholbrook@@usgs.gov}
 #'
 #' @return A character string containing the full path to file written to disk.
@@ -1144,23 +1156,30 @@ add_comments_glatos_workbook_xlsx <- function(wbx){
 #'
 #' wb <- read_glatos_workbook(wb_file)
 #'
-#' wbx <- as_glatos_workbook_xlsx(wb, local_tzone = "US/Eastern")
-#'
-#' #openxlsx::openXL(wbx)
-#'
-#' write_glatos_workbook_xlsx(wbx)
+#' write_glatos_workbook(wb, local_tzone = "US/Eastern")
 #' @export
 #'
-write_glatos_workbook_xlsx <- function(wb,
-                                     out_dir = NULL,
-                                     xl_file = NULL,
-                                     xl_format = "xlsx",
-                                     overwrite = FALSE){
+write_glatos_workbook <- function(wb,
+                                       out_dir = NULL,
+                                       xl_file = NULL,
+                                       xl_format = "xlsx",
+                                       overwrite = FALSE,
+                                       local_tzone = NULL){
 
   xl_format <- match.arg(xl_format)
 
   # set output director if not specified
   if(is.null(out_dir)) out_dir <- getwd()
+
+
+  # Convert from glatos_workbook to openxlsx Workbook if needed
+  if(inherits(wb, "glatos_workbook")){
+
+    stopifnot("'local_tzone' must be specified." = !is.null(local_tzone))
+
+    wb <- as_glatos_workbook_xlsx(wb, local_tzone)
+  }
+
 
   # write to disk
   # if xl_file = NULL, use automatic naming convention consistent with macro
@@ -1189,6 +1208,17 @@ write_glatos_workbook_xlsx <- function(wb,
 
 }
 
+#' [Deprecated] Use write_glatos_workbook instead
+#' @description This function has been deprecated and will be removed from next
+#'   version of package. Use \code{\link{write_glatos_workbook}} instead
+#' @export
+write_glatos_workbook_xlsx <- function(...) {
+
+  .Deprecated("write_glatos_workbook")
+
+  write_glatos_workbook(...)
+
+}
 
 #' Write GLATOS Data Submission Package
 #'
@@ -1210,8 +1240,16 @@ write_glatos_workbook_xlsx <- function(wb,
 #' @param overwrite Should existing file with same name be overwritten?
 #'
 #' @param local_tzone A character string specifying the time zone to be used for
-#'   the conversion from UTC to local time (e.g, "US/Eastern"). Passed to
-#'   \code{as_glatos_workbook_xlsx}.
+#'   the conversion from UTC to local time (e.g, "US/Eastern"). See details.
+#'
+#' @details Local time zone must be specified (via \code{local_tzone}) because
+#'   \code{glatos_workbook} objects only contain time stamps in UTC. However,
+#'   the GLATOS Data Submission Package (a *.zip archive containing a *.xlsm
+#'   file) requires data in a local time zone (limited to \code{"US/Eastern"} or
+#'   \code{"US/Central"}, which are actually expressed simply as
+#'   \code{"Eastern"} or \code{"Central"} in a GLATOS Submission Package. Thus,
+#'   for GLATOS Data Portal compatibility, only values of \code{local_tzone}
+#'   supported are \code{"US/Eastern"} or \code{"US/Central"} are allowed.
 #'
 #' @return A character string containing path and name of output file. An xlsx
 #'   file and zip archive containing a copy of the xlsx file and csv versions
@@ -1242,7 +1280,7 @@ write_glatos_submission_package <- function(wb,
   if(is.null(out_dir)) out_dir <- getwd()
 
 
-  # Convert from glatos_work to openxlsx Workbook if needed
+  # Convert from glatos_workbook to openxlsx Workbook if needed
   if(inherits(wb, "glatos_workbook")){
 
     stopifnot("'local_tzone' must be specified." = !is.null(local_tzone))
@@ -1251,10 +1289,10 @@ write_glatos_submission_package <- function(wb,
   }
 
   # Write xl file to disk
-  xl_file <- write_glatos_workbook_xlsx(wbx, out_dir = out_dir,
-                                        xl_file = xl_file,
-                                        xl_format = xl_format,
-                                        overwrite = overwrite)
+  xl_file <- write_glatos_workbook(wbx, out_dir = out_dir,
+                                   xl_file = xl_file,
+                                   xl_format = xl_format,
+                                   overwrite = overwrite)
 
   # Write csvs to disk
   temp_dir <- tempdir()

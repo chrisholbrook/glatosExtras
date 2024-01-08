@@ -1,3 +1,15 @@
+# glatosExtras 0.2.0
+
+## Minor changes
+
+* Allow `glatos_workbook` object input to `write_glatos_workbook` 
+  (previously requires `glatos_workbook_xlsx` object).
+  
+* Change name of `write_glatos_workbook_xlsx` to `write_glatos_workbook`, 
+  deprecate `write_glatos_workbook_xlsx`, and (for now) simply pass all args 
+  to `write_glatos_workbook`.
+
+
 # glatosExtras 0.1.0
 
 ## New features
