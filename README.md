@@ -58,7 +58,7 @@ wb_file <- "c:/user/documents/walleye_workbook.xlsm"
 wb <- read_glatos_workbook(wb_file)
 
 # Write GLATOS Workbook (as *.xlsx file)
-write_glatos_workbook_xlsx(wb, local_tzone = "US/Eastern")
+write_glatos_workbook(wb, local_tzone = "US/Eastern")
 
 ```
 
